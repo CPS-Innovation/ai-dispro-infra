@@ -31,11 +31,12 @@ jobs:
 
       - name: Terraform Init
         working-directory: ./terraform/code
-        run: terraform init
-              -backend-config="resource_group_name=rg-dispro-dev" \
-              -backend-config="storage_account_name=stdisprodev002" \
-              -backend-config="container_name=tfstate" \
-              -backend-config="key=nonprod/landing-zone.tfstate"
+        run: |
+          terraform init \
+            -backend-config="resource_group_name=rg-dispro-dev" \
+            -backend-config="storage_account_name=stdisprodev002" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=nonprod/landing-zone.tfstate"
 
       - name: Terraform Plan
         working-directory: ./terraform/code
