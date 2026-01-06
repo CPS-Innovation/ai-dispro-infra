@@ -1,0 +1,43 @@
+name: Terraform Azure Landing Zone
+
+# Manual trigger with input
+on:
+  workflow_dispatch:
+    inputs:
+      apply_changes:
+        description: 'Check to actually apply the Terraform changes'
+        required: true
+        default: 'false'
+        type: boolean
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ai_dispro_nonprod_azure_client_id }}
+      ARM_CLIENT_SECRET: ${{ secrets.ai_dispro_nonprod_azure_client_secret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ai_dispro_nonprod_azure_subscription_id }}
+      ARM_TENANT_ID: ${{ secrets.ai_dispro_nonprod_azure_tenant_id }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.14.0
+
+      - name: Terraform Init
+        working-directory: ./terraform/code
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ./terraform/code
+        run: terraform plan -var-file=../environments/nonprod.tfvars -out=tfplan
+
+      - name: Terraform Apply
+        if: ${{ github.event.inputs.apply_changes == 'true' }}
+        working-directory: ./terraform/code
+        run: terraform apply -auto-approve tfplan
