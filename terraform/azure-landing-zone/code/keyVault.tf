@@ -15,7 +15,7 @@ resource "azurerm_private_endpoint" "kv_pe" {
   name                = "pe-kv-cmd-${var.subscription}-01"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = data.azurerm_subnet.nonprod_subnet.id
+  subnet_id           = azurerm_subnet.nonprod_subnet.id
 
   private_service_connection {
     name                           = "psc-kv-cmd-${var.subscription}-01"
