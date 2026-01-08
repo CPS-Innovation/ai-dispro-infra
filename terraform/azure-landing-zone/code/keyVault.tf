@@ -9,7 +9,6 @@ resource "azurerm_key_vault" "kv" {
   enabled_for_disk_encryption   = true
   enable_rbac_authorization     = true
   public_network_access_enabled = false
-  tags                          = module.tags.keyvalues
 }
 
 resource "azurerm_private_endpoint" "kv_pe" {
