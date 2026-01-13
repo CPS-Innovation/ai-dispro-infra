@@ -40,7 +40,15 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ./terraform/azure-landing-zone/code
-        run: terraform plan -var-file=../environments/nonprod.tfvars -out=tfplan
+        run: |
+          terraform plan \
+            -var-file=../environments/nonprod.tfvars \
+            -var "pipeline_name=${{ github.workflow }}" \
+            -var "repo_name=${{ github.repository }}" \
+            -var "branch_name=${{ github.ref_name }}" \
+            -var "repo_uri=${{ github.server_url }}/${{ github.repository }}" \
+            -var "run_number=${{ github.run_number }}" \
+            -out=tfplan
 
       - name: Terraform Apply
         if: ${{ github.event.inputs.apply_changes == 'true' }}

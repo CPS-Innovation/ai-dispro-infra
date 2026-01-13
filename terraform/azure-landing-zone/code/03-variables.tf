@@ -12,6 +12,26 @@ variable "vnet_address_space" {
   type        = list(string)
 }
 
+variable "pipeline_name" {
+  type = string
+}
+
+variable "repo_name" {
+  type = string
+}
+
+variable "branch_name" {
+  type = string
+}
+
+variable "repo_uri" {
+  type = string
+}
+
+variable "date" {
+  type = string
+}
+
 variable "subnets" {
   description = "List of subnet objects, each with name, address_prefixes, optional security_group, optional route_table_id, and optional delegation."
   type = list(object({
