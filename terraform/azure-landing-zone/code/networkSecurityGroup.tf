@@ -9,7 +9,6 @@ resource "azurerm_monitor_diagnostic_setting" "nsg_diagnostic" {
   name                       = "diag-nsg-aid-${var.subscription}-01"
   target_resource_id         = azurerm_network_security_group.nsg.id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
-  tags                       = module.tags.keyvalues
 
   enabled_log {
     category = "NetworkSecurityGroupEvent"
