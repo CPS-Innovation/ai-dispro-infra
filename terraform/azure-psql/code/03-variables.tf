@@ -46,17 +46,3 @@ variable "sku" {
 variable "static_ip" {
   type = string
 }
-
-variable "subnets" {
-  description = "List of subnet objects, each with name, address_prefixes, optional security_group, optional route_table_id, and optional delegation."
-  type = list(object({
-    name             = string
-    address_prefixes = list(string)
-    security_group   = optional(string)
-    route_table_id   = optional(string)
-    service_delegation = optional(object({
-      name    = string
-      actions = list(string)
-    }))
-  }))
-}

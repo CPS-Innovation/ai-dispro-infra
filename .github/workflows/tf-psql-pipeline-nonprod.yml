@@ -36,7 +36,7 @@ jobs:
             -backend-config="resource_group_name=rg-aid-tfstate-nonprod-01" \
             -backend-config="storage_account_name=staidtfstatenonprod01" \
             -backend-config="container_name=tfstate" \
-            -backend-config="key=azure-psql-nonprod.tfstate"
+            -backend-config="key=azure-psql-dev.tfstate"
 
       - name: Terraform Plan
         working-directory: ./terraform/azure-psql/code
