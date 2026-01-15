@@ -5,5 +5,5 @@ variable "repo_uri" {}
 variable "date" {}
 variable "environment" {}
 variable "run_number" {
-  
+
 }
