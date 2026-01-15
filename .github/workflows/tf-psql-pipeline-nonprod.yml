@@ -1,4 +1,4 @@
-name: Azure Landing Zone TF NonProd
+name: Azure PSQL TF NonProd
 
 # Manual trigger with input
 on:
