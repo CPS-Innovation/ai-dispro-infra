@@ -94,7 +94,6 @@ resource "azurerm_linux_function_app" "aid_func" {
     ]
   }
 
-  depends_on = [azurerm_storage_account.aid_sa]
 }
 
 resource "azurerm_private_endpoint" "func_pe" {
