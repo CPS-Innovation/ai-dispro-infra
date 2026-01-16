@@ -7,13 +7,11 @@ resource "azurerm_linux_function_app" "aid_func" {
   storage_account_access_key    = data.azurerm_storage_account.fadependency_sa.primary_access_key
   virtual_network_subnet_id     = data.azurerm_subnet.asp_shrd_vnetint_subnet.id
   public_network_access_enabled = false
-  functions_extension_version   = "~4"
   https_only                    = true
   tags                          = module.tags.keyvalues
-  
+
   app_settings = {
-    
-    APPINSIGHTS_INSTRUMENTATIONKEY   = azurerm_application_insights.aid_ai.instrumentation_key
+    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.aid_ai.instrumentation_key
 
     AZURE_AI_FOUNDRY_API_VERSION     = "2025-03-01-preview"
     AZURE_AI_FOUNDRY_DEPLOYMENT_NAME = "gpt-4o"
@@ -72,15 +70,8 @@ resource "azurerm_linux_function_app" "aid_func" {
   }
 
   site_config {
-
     application_stack {
-      dotnet_version              = ""
-      java_version                = ""
-      node_version                = ""
-      powershell_core_version     = ""
-      python_version              = "3.13"
-      use_custom_runtime          = false
-      use_dotnet_isolated_runtime = false
+      python_version = "3.11"
     }
 
     cors {
@@ -90,10 +81,7 @@ resource "azurerm_linux_function_app" "aid_func" {
       support_credentials = false
     }
 
-    # ip_restriction_default_action     = "Deny"
-    # scm_ip_restriction_default_action = "Deny"
     scm_use_main_ip_restriction = true
-
   }
 
   identity {

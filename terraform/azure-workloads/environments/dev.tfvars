@@ -1,3 +1,3 @@
-environment    = "dev"
-subscription   = "nonprod"
+environment  = "dev"
+subscription = "nonprod"
 
