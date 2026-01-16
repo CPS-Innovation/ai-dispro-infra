@@ -1,0 +1,5 @@
+environment    = "stg"
+subscription   = "nonprod"
+cms_uri        = "https://eas-app-ddei-staging-cmsproxy.azurewebsites.net"
+schedule       = "0 1 8 * *"
+blob_subfolder = "Raw Data/test"

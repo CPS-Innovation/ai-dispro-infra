@@ -1,0 +1,57 @@
+name: Azure Workloads TF Dev
+
+# Manual trigger with input
+on:
+  workflow_dispatch:
+    inputs:
+      apply_changes:
+        description: 'Select to Run Terraform Apply'
+        required: true
+        default: 'false'
+        type: boolean
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ai_dispro_nonprod_azure_client_id }}
+      ARM_CLIENT_SECRET: ${{ secrets.ai_dispro_nonprod_azure_client_secret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ai_dispro_nonprod_azure_subscription_id }}
+      ARM_TENANT_ID: ${{ secrets.ai_dispro_nonprod_azure_tenant_id }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.14.0
+
+      - name: Terraform Init
+        working-directory: ./terraform/azure-workloads/code
+        run: |
+          terraform init \
+            -backend-config="resource_group_name=rg-aid-tfstate-nonprod-01" \
+            -backend-config="storage_account_name=staidtfstatenonprod01" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=azure-workloads-dev.tfstate"
+
+      - name: Terraform Plan
+        working-directory: ./terraform/azure-workloads/code
+        run: |
+          terraform plan \
+            -var-file=../environments/dev.tfvars \
+            -var "pipeline_name=${{ github.workflow }}" \
+            -var "repo_name=${{ github.repository }}" \
+            -var "branch_name=${{ github.ref_name }}" \
+            -var "repo_uri=${{ github.server_url }}/${{ github.repository }}" \
+            -var "date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+            -var "run_number=${{ github.run_number }}" \
+            -out=tfplan
+
+      - name: Terraform Apply
+        if: ${{ github.event.inputs.apply_changes == 'true' }}
+        working-directory: ./terraform/azure-workloads/code
+        run: terraform apply -auto-approve tfplan

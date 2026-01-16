@@ -1,0 +1,5 @@
+environment    = "prd"
+subscription   = "prod"
+cms_uri        = "https://wm-app-ddei-cmsproxy.azurewebsites.net"
+schedule       = "0 1 12 * *"
+blob_subfolder = "Raw Data/live"
