@@ -4,6 +4,8 @@ resource "azurerm_ai_services" "foundry" {
   location            = azurerm_resource_group.rg.location
   sku_name            = "S0"
 
+  custom_subdomain_name = "aif-aid-${var.environment}"
+
   identity {
     type = "SystemAssigned"
   }
