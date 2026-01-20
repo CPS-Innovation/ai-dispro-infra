@@ -7,6 +7,11 @@ resource "azurerm_ai_services" "foundry" {
   custom_subdomain_name = "aif-aid-${var.environment}"
 
   public_network_access = "Enabled"
+  network_acls {
+    bypass         = ""
+    default_action = "Allow"
+    ip_rules       = []
+  }
 
   identity {
     type = "SystemAssigned"
