@@ -6,7 +6,7 @@ resource "azurerm_ai_services" "foundry" {
 
   custom_subdomain_name = "aif-aid-${var.environment}"
 
-  public_network_access = true
+  public_network_access = "Enabled"
 
   identity {
     type = "SystemAssigned"
