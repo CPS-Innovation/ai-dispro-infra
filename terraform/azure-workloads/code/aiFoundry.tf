@@ -3,6 +3,10 @@ resource "azurerm_ai_services" "foundry" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   sku_name            = "S0"
+
+  identity {
+    type = "SystemAssigned"
+  }
 }
 
 # Enable project management for AI Foundry
