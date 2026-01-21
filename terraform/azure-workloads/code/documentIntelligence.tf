@@ -15,7 +15,7 @@ resource "azurerm_cognitive_account" "document_intelligence" {
     ip_rules       = []
   }
 
-  local_auth_enabled = true
+  local_auth_enabled = false
 
   identity {
     type = "SystemAssigned"
