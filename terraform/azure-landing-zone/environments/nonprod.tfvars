@@ -23,11 +23,11 @@ subnets = [
     }
   },
   {
-    name             = "snet-asp-shrd-pe-dev-01"
+    name             = "snet-pe-dev-01"
     address_prefixes = ["10.7.194.64/28"]
   },
   {
-    name             = "snet-asp-shrd-pe-stg-01"
+    name             = "snet-pe-stg-01"
     address_prefixes = ["10.7.194.80/28"]
   }
 ]
