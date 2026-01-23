@@ -60,7 +60,7 @@ resource "azurerm_private_endpoint" "ai_foundry_pe" {
   name                = "pe-aif-aid-${var.environment}-01"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = data.azurerm_subnet.asp_shrd_pe_subnet.id
+  subnet_id           = data.azurerm_subnet.pe_subnet.id
   tags                = module.tags.keyvalues
 
   private_service_connection {

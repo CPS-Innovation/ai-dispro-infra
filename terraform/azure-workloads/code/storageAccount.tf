@@ -11,7 +11,7 @@ resource "azurerm_private_endpoint" "aiddf_sa_blob_pe" {
   name                = "pe-sa-blob-aiddf-${var.environment}-01"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = data.azurerm_subnet.nonprod_subnet.id
+  subnet_id           = data.azurerm_subnet.pe_subnet.id
   tags                = module.tags.keyvalues
 
   private_service_connection {
@@ -37,7 +37,7 @@ resource "azurerm_private_endpoint" "aiddf_sa_table_pe" {
   name                = "pe-sa-table-aiddf-${var.environment}-01"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = data.azurerm_subnet.nonprod_subnet.id
+  subnet_id           = data.azurerm_subnet.pe_subnet.id
   tags                = module.tags.keyvalues
 
   private_service_connection {
@@ -63,7 +63,7 @@ resource "azurerm_private_endpoint" "aiddf_sa_queue_pe" {
   name                = "pe-sa-queue-aiddf-${var.environment}-01"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = data.azurerm_subnet.nonprod_subnet.id
+  subnet_id           = data.azurerm_subnet.pe_subnet.id
   tags                = module.tags.keyvalues
 
   private_service_connection {

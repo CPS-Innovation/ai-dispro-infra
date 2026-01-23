@@ -4,14 +4,8 @@ data "azurerm_subnet" "asp_shrd_vnetint_subnet" {
   resource_group_name  = "rg-aid-${var.subscription}-01"
 }
 
-data "azurerm_subnet" "asp_shrd_pe_subnet" {
-  name                 = "snet-asp-shrd-pe-${var.environment}-01"
-  virtual_network_name = "vnet-aid-${var.subscription}-01"
-  resource_group_name  = "rg-aid-${var.subscription}-01"
-}
-
-data "azurerm_subnet" "nonprod_subnet" {
-  name                 = "snet-${var.subscription}-01"
+data "azurerm_subnet" "pe_subnet" {
+  name                 = "snet-${var.environment}-01"
   virtual_network_name = "vnet-aid-${var.subscription}-01"
   resource_group_name  = "rg-aid-${var.subscription}-01"
 }
