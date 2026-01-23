@@ -1,4 +1,4 @@
-name: Azure PSQL TF NonProd
+name: Azure Data TF NonProd
 
 # Manual trigger with input
 on:
