@@ -16,7 +16,7 @@ resource "azurerm_private_endpoint" "kv_pe" {
   name                = "pe-kv-aid-${var.subscription}-01"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = local.subnet_ids["snet-nonprod-01"]
+  subnet_id           = local.subnet_ids["snet-${var.subscription}-01"]
   tags                = module.tags.keyvalues
 
   private_service_connection {
