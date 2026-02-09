@@ -57,11 +57,23 @@ resource "azurerm_private_endpoint" "psql_private_endpoint" {
 resource "azurerm_postgresql_flexible_server_configuration" "psql-dp-enable-uuidossp" {
   name      = "azure.extensions"
   server_id = azurerm_postgresql_flexible_server.psql.id
-  value     = "UUID-OSSP"
+  value     = "UUID-OSSP,PG_CRON,PGAUDIT"
 }
 
 resource "azurerm_postgresql_flexible_server_configuration" "psql-dp-enable-connectionthrottling" {
   name      = "connection_throttle.enable"
   server_id = azurerm_postgresql_flexible_server.psql.id
   value     = "on"
+}
+
+resource "azurerm_postgresql_flexible_server_configuration" "psql-pgaudit-log" {
+  name      = "pgaudit.log"
+  server_id = azurerm_postgresql_flexible_server.psql.id
+  value     = "DDL,READ,WRITE"
+}
+
+resource "azurerm_postgresql_flexible_server_configuration" "psql-pgaudit-role" {
+  name      = "pgaudit.role"
+  server_id = azurerm_postgresql_flexible_server.psql.id
+  value     = "pgaudit"
 }
