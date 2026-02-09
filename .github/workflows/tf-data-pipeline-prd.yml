@@ -1,4 +1,4 @@
-name: Azure Data TF NonProd
+name: Azure Data TF Prd
 
 # Manual trigger with input
 on:
@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ARM_CLIENT_ID: ${{ secrets.ai_dispro_nonprod_azure_client_id }}
-      ARM_CLIENT_SECRET: ${{ secrets.ai_dispro_nonprod_azure_client_secret }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ai_dispro_nonprod_azure_subscription_id }}
-      ARM_TENANT_ID: ${{ secrets.ai_dispro_nonprod_azure_tenant_id }}
+      ARM_CLIENT_ID: ${{ secrets.ai_dispro_prod_azure_client_id }}
+      ARM_CLIENT_SECRET: ${{ secrets.ai_dispro_prod_azure_client_secret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ai_dispro_prod_azure_subscription_id }}
+      ARM_TENANT_ID: ${{ secrets.ai_dispro_prod_azure_tenant_id }}
 
     steps:
       - name: Checkout repo
@@ -33,16 +33,16 @@ jobs:
         working-directory: ./terraform/azure-data/code
         run: |
           terraform init \
-            -backend-config="resource_group_name=rg-aid-tfstate-nonprod-01" \
-            -backend-config="storage_account_name=staidtfstatenonprod01" \
+            -backend-config="resource_group_name=rg-aid-tfstate-prod-01" \
+            -backend-config="storage_account_name=staidtfstateprod01" \
             -backend-config="container_name=tfstate" \
-            -backend-config="key=azure-data-dev.tfstate"
+            -backend-config="key=azure-data-prd.tfstate"
 
       - name: Terraform Plan
         working-directory: ./terraform/azure-data/code
         run: |
           terraform plan \
-            -var-file=../environments/dev.tfvars \
+            -var-file=../environments/prd.tfvars \
             -var "pipeline_name=${{ github.workflow }}" \
             -var "repo_name=${{ github.repository }}" \
             -var "branch_name=${{ github.ref_name }}" \
