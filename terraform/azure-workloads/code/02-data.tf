@@ -31,6 +31,7 @@ output "log_analytics_workspace_id" {
   value = data.azurerm_log_analytics_workspace.law.id
 }
 
+/*
 
 data "azurerm_app_service_plan" "shared_asp" {
   name                = "asp-aid-shrd-${var.subscription}-01"
@@ -40,6 +41,8 @@ data "azurerm_app_service_plan" "shared_asp" {
 output "app_service_plan_id" {
   value = data.azurerm_app_service_plan.shared_asp.id
 }
+
+*/
 
 
 
