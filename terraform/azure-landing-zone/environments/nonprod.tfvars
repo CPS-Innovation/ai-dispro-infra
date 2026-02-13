@@ -1,4 +1,5 @@
 subscription = "nonprod"
+location = "ukwest"
 
 vnet_address_space = ["10.7.194.0/24"]
 subnets = [
