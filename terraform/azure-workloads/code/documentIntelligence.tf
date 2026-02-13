@@ -24,7 +24,7 @@ resource "azurerm_cognitive_account" "document_intelligence" {
 
 resource "azurerm_private_endpoint" "document_intelligence_pe" {
   name                = "pe-di-aid-${var.environment}-01"
-  location            = azurerm_resource_group.rg.location
+  location            = "UK South"
   resource_group_name = azurerm_resource_group.rg.name
   subnet_id           = data.azurerm_subnet.pe_subnet.id
   tags                = module.tags.keyvalues

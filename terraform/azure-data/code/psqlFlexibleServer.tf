@@ -15,6 +15,7 @@ resource "azurerm_postgresql_flexible_server" "psql" {
     password_auth_enabled         = false
   }
 
+  /*
   dynamic "high_availability" {
     for_each = var.environment == "prd" ? [1] : []
     content {
@@ -22,6 +23,7 @@ resource "azurerm_postgresql_flexible_server" "psql" {
       standby_availability_zone = "2" # Ensure this is different from the primary zone
     }
   }
+  */
 
 }
 
