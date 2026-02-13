@@ -1,5 +1,5 @@
 subscription = "prod"
-location = "ukwest"
+location     = "ukwest"
 
 vnet_address_space = ["10.7.195.0/24"]
 subnets = [

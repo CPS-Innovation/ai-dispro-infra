@@ -1,2 +1,2 @@
-environment    = "prd"
-subscription   = "prod"
+environment  = "prd"
+subscription = "prod"
