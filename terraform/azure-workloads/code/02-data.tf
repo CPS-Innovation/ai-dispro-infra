@@ -51,6 +51,11 @@ output "storage_account_access_key" {
 
 }
 
+output "storage_account_connection_string" {
+  value     = data.azurerm_storage_account.fadependency_sa.primary_connection_string
+  sensitive = true
+}
+
 data "azurerm_private_dns_zone" "app" {
   name                = "privatelink.azurewebsites.net"
   resource_group_name = "rg-aid-${var.subscription}-01"
