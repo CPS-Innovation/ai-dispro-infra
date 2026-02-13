@@ -64,6 +64,7 @@ resource "azurerm_linux_function_app" "aid_func" {
     TABLE_NAME_TEST     = "test"
 
     WEBSITE_CONTENTSHARE = "fa-co-dispro-dev-01aa99"
+    WEBSITE_CONTENTAZUREFILECONNECTIONSTRING = "temp"
 
     XDG_CACHE_HOME = "/tmp/.cache"
   }
