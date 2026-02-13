@@ -3,7 +3,7 @@ resource "azurerm_postgresql_flexible_server" "psql" {
   location                      = azurerm_resource_group.rg.location
   resource_group_name           = azurerm_resource_group.rg.name
   version                       = "17"
-  zone                          = "1"
+  # zone                          = "1"
   sku_name                      = var.sku
   storage_mb                    = 131072
   storage_tier                  = "P10"
