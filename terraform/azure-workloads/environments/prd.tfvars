@@ -1,3 +1,3 @@
 environment  = "prd"
-location     = "ukwest"
+location     = "uksouth"
 subscription = "prod"
