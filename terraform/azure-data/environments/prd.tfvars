@@ -1,5 +1,5 @@
 environment  = "prd"
-location     = "ukwest"
+location     = "uksouth"
 subscription = "prod"
 sku          = "GP_Standard_D2s_v3"
 static_ip    = "10.7.195.20"
