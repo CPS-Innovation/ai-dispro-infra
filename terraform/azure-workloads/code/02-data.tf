@@ -42,7 +42,6 @@ output "app_service_plan_id" {
   value = data.azurerm_app_service_plan.shared_asp.id
 }
 
-*/
 data "azurerm_storage_account" "fadependency_sa" {
   name                = "stfadepaidshrd${var.subscription}01"
   resource_group_name = "rg-aid-${var.subscription}-01"
@@ -58,6 +57,8 @@ output "storage_account_connection_string" {
   value     = data.azurerm_storage_account.fadependency_sa.primary_connection_string
   sensitive = true
 }
+
+*/
 
 data "azurerm_private_dns_zone" "app" {
   name                = "privatelink.azurewebsites.net"
