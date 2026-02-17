@@ -3,7 +3,7 @@ resource "azurerm_postgresql_flexible_server" "psql" {
   location                      = azurerm_resource_group.rg.location
   resource_group_name           = azurerm_resource_group.rg.name
   version                       = "17"
-  # zone                          = "1"
+  zone                          = "1"
   sku_name                      = var.sku
   storage_mb                    = 131072
   storage_tier                  = "P10"
@@ -15,7 +15,6 @@ resource "azurerm_postgresql_flexible_server" "psql" {
     password_auth_enabled         = false
   }
 
-  /*
   dynamic "high_availability" {
     for_each = var.environment == "prd" ? [1] : []
     content {
@@ -23,8 +22,6 @@ resource "azurerm_postgresql_flexible_server" "psql" {
       standby_availability_zone = "2" # Ensure this is different from the primary zone
     }
   }
-  */
-
 }
 
 resource "azurerm_private_endpoint" "psql_private_endpoint" {
