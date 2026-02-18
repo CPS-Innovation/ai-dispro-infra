@@ -31,8 +31,6 @@ output "log_analytics_workspace_id" {
   value = data.azurerm_log_analytics_workspace.law.id
 }
 
-/*
-
 data "azurerm_app_service_plan" "shared_asp" {
   name                = "asp-aid-shrd-${var.subscription}-01"
   resource_group_name = "rg-aid-${var.subscription}-01"
@@ -58,8 +56,6 @@ output "storage_account_connection_string" {
   sensitive = true
 }
 
-*/
-
 data "azurerm_private_dns_zone" "app" {
   name                = "privatelink.azurewebsites.net"
   resource_group_name = "rg-aid-${var.subscription}-01"
@@ -84,6 +80,8 @@ data "azurerm_private_dns_zone" "ai_services" {
   name                = "privatelink.cognitiveservices.azure.com"
   resource_group_name = "rg-aid-${var.subscription}-01"
 }
+
+/*
 
 # UK West Resources
 
@@ -123,3 +121,5 @@ data "azurerm_subnet" "pe_subnet_2" {
   virtual_network_name = "vnet-aid-${var.subscription}-02"
   resource_group_name  = "rg-aid-${var.subscription}-02"
 }
+
+*/
