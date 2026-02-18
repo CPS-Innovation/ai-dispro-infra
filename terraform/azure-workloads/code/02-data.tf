@@ -89,7 +89,7 @@ data "azurerm_private_dns_zone" "ai_services" {
 
 data "azurerm_app_service_plan" "shared_asp_2" {
   name                = "asp-aid-shrd-${var.subscription}-02"
-  resource_group_name = "rg-aid-${var.subscription}-02"
+  resource_group_name = "rg-aid-app-workloads-02"
 }
 
 output "app_service_plan_id" {
