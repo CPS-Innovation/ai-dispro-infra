@@ -84,3 +84,42 @@ data "azurerm_private_dns_zone" "ai_services" {
   name                = "privatelink.cognitiveservices.azure.com"
   resource_group_name = "rg-aid-${var.subscription}-01"
 }
+
+# UK West Resources
+
+data "azurerm_app_service_plan" "shared_asp_2" {
+  name                = "asp-aid-shrd-${var.subscription}-02"
+  resource_group_name = "rg-aid-${var.subscription}-02"
+}
+
+output "app_service_plan_id" {
+  value = data.azurerm_app_service_plan.shared_asp_2.id
+}
+
+data "azurerm_storage_account" "fadependency_sa_2" {
+  name                = "stfadepaidshrd${var.subscription}02"
+  resource_group_name = "rg-aid-${var.subscription}-02"
+}
+
+output "storage_account_access_key" {
+  value     = data.azurerm_storage_account.fadependency_sa_2.primary_access_key
+  sensitive = true
+
+}
+
+output "storage_account_connection_string" {
+  value     = data.azurerm_storage_account.fadependency_sa_2.primary_connection_string
+  sensitive = true
+}
+
+data "azurerm_subnet" "asp_shrd_vnetint_subnet_2" {
+  name                 = "snet-asp-shrd-vnetint-${var.subscription}-01"
+  virtual_network_name = "vnet-aid-${var.subscription}-02"
+  resource_group_name  = "rg-aid-${var.subscription}-02"
+}
+
+data "azurerm_subnet" "pe_subnet_2" {
+  name                 = "snet-pe-${var.environment}-01"
+  virtual_network_name = "vnet-aid-${var.subscription}-02"
+  resource_group_name  = "rg-aid-${var.subscription}-02"
+}
