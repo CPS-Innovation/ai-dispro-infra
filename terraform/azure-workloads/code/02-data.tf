@@ -98,7 +98,7 @@ output "app_service_plan_id" {
 
 data "azurerm_storage_account" "fadependency_sa_2" {
   name                = "stfadepaidshrd${var.subscription}02"
-  resource_group_name = "rg-aid-${var.subscription}-02"
+  resource_group_name = "rg-aid-app-workloads-02"
 }
 
 output "storage_account_access_key" {
