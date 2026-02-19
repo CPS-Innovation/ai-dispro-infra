@@ -22,5 +22,9 @@ subnets = [
   {
     name             = "snet-pe-prd-01"
     address_prefixes = ["10.7.195.48/28"]
+  },
+  {
+    name             = "snet-ts-01"
+    address_prefixes = ["10.7.195.64/28"]
   }
 ]
