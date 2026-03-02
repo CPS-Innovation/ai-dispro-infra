@@ -29,7 +29,7 @@ resource "azurerm_private_endpoint" "fadependency-sa-blob-pe" {
   private_dns_zone_group {
     name = "pdz-sa-blob-aidfadep-${var.subscription}-01"
     private_dns_zone_ids = [
-      azurerm_private_dns_zone.blob.id
+      azurerm_private_dns_zone.storage_blob.id
     ]
   }
 
