@@ -17,7 +17,6 @@ resource "azurerm_linux_function_app" "aid_func" {
     AZURE_AI_FOUNDRY_API_VERSION     = "2025-03-01-preview"
     AZURE_AI_FOUNDRY_DEPLOYMENT_NAME = "gpt-4o"
     AZURE_AI_FOUNDRY_ENDPOINT        = "https://aif-aid-${var.environment}-01.cognitiveservices.azure.com"
-    AZURE_AI_FOUNDRY_PROJECT         = "aif-dispro-dev"
 
     ###### Doc Intelligence Settings ######
 
@@ -66,7 +65,7 @@ resource "azurerm_linux_function_app" "aid_func" {
 
     ###### Standard App Settings ######
 
-    APPLICATIONINSIGHTS_CONNECTION_STRING    = azurerm_application_insights.aid_ai.instrumentation_key
+    APPLICATIONINSIGHTS_CONNECTION_STRING    = azurerm_application_insights.aid_ai.connection_string
     AzureWebJobsStorage                      = data.azurerm_storage_account.fadependency_sa.primary_connection_string
     BUILD_FLAGS                              = "UseExpressBuild"
     ENABLE_ORYX_BUILD                        = "true"
