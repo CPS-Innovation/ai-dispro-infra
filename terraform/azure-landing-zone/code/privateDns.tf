@@ -102,6 +102,30 @@ resource "azurerm_private_dns_zone_virtual_network_link" "storage_blob_vnet_link
 
 # ----------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------
+# Private DNS Zone for Storage File
+# -----------------------------------------
+resource "azurerm_private_dns_zone" "storage_file" {
+  name                = "privatelink.file.core.windows.net"
+  resource_group_name = azurerm_resource_group.rg.name
+  tags                = module.tags.keyvalues
+}
+
+# -----------------------------------------
+# Link Storage File DNS Zone to VNET
+# -----------------------------------------
+resource "azurerm_private_dns_zone_virtual_network_link" "storage_file_vnet_link" {
+  name                  = "pdz-storage-file-vnet-link-${var.subscription}-01"
+  resource_group_name   = azurerm_resource_group.rg.name
+  private_dns_zone_name = azurerm_private_dns_zone.storage_file.name
+  virtual_network_id    = azurerm_virtual_network.vnet.id
+  registration_enabled  = false
+  tags                  = module.tags.keyvalues
+}
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------
 # Private DNS Zone for Storage Table
 # -----------------------------------------
 resource "azurerm_private_dns_zone" "storage_table" {
