@@ -19,7 +19,10 @@ resource "azurerm_linux_function_app" "aid_func" {
     AZURE_AI_FOUNDRY_ENDPOINT        = "https://aif-aid-${var.environment}-01.cognitiveservices.azure.com"
     AZURE_AI_FOUNDRY_PROJECT         = "aif-dispro-dev"
 
+    ###### Storage Settings ######
+
     AZURE_BLOB_ACCOUNT_NAME       = "staidds${var.environment}01"
+
     BLOB_CONTAINER_NAME_PROCESSED = "processedq4"
     BLOB_CONTAINER_NAME_SECTION   = "sectionq4"
     BLOB_CONTAINER_NAME_SOURCE    = "sourceq4"
@@ -31,6 +34,7 @@ resource "azurerm_linux_function_app" "aid_func" {
     # AZURE_BLOB_CONTAINER_NAME_TEST     = "processedtst"
 
     TABLE_NAME_ANALYSISJOBS     = "analysisjobs_q4"
+    TABLE_NAME_ANALYSISRESULTS  = "analysisresults_q4"
     TABLE_NAME_CASES            = "cases_q4"
     TABLE_NAME_CHARGES          = "charges_q4"
     TABLE_NAME_DEFENDANTS       = "defendants_q4"
@@ -52,8 +56,11 @@ resource "azurerm_linux_function_app" "aid_func" {
 
     AZURE_DOC_INTELLIGENCE_API_VERSION = "2024-11-30"
     AZURE_DOC_INTELLIGENCE_ENDPOINT    = "https://di-aid-${var.environment}-01.cognitiveservices.azure.com/"
-
+    
     AZURE_KEY_VAULT_URI                      = "https://kv-aid-${var.subscription}-01.vault.azure.net/"
+
+     ###### CMS/CIN Settings ######
+
     CMS_API_KEY_AZURE_KEY_VAULT_SECRET_NAME  = "aid-cms-api-key"
     CMS_USERNAME_AZURE_KEY_VAULT_SECRET_NAME = "aid-cms-username"
     CMS_PASSWORD_AZURE_KEY_VAULT_SECRET_NAME = "aid-cms-password"
@@ -77,6 +84,8 @@ resource "azurerm_linux_function_app" "aid_func" {
     XDG_CACHE_HOME                           = "/tmp/.cache"
 
     # ENVIRONMENT       = "tst"
+
+    ###### Database Settings ######
 
     POSTGRESQL_DATABASE_NAME = "ai_dispro_db"
     POSTGRESQL_HOST          = "psql-aid-${var.environment}-01.postgres.database.azure.com"
