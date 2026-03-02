@@ -64,7 +64,6 @@ resource "azurerm_linux_function_app" "aid_func" {
     POSTGRESQL_SCHEMA        = "ai_dispro_schema"
     POSTGRESQL_USERNAME      = "fa-aid-${var.environment}-01"
 
-
     ###### Standard App Settings ######
 
     APPINSIGHTS_INSTRUMENTATIONKEY           = azurerm_application_insights.aid_ai.instrumentation_key
