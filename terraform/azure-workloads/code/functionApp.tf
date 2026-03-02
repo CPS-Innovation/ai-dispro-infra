@@ -66,14 +66,14 @@ resource "azurerm_linux_function_app" "aid_func" {
 
     ###### Standard App Settings ######
 
-    APPINSIGHTS_INSTRUMENTATIONKEY           = azurerm_application_insights.aid_ai.instrumentation_key
+    APPLICATIONINSIGHTS_CONNECTION_STRING    = azurerm_application_insights.aid_ai.instrumentation_key
     AzureWebJobsStorage                      = data.azurerm_storage_account.fadependency_sa.primary_connection_string
     BUILD_FLAGS                              = "UseExpressBuild"
     ENABLE_ORYX_BUILD                        = "true"
     FUNCTIONS_EXTENSION_VERSION              = "~4"
     FUNCTIONS_WORKER_RUNTIME                 = "python"
     SCM_DO_BUILD_DURING_DEPLOYMENT           = "1"
-    WEBSITE_CONTENTSHARE                     = "fa-co-dispro-dev-01aa99"
+    WEBSITE_CONTENTSHARE                     = "fa-aid-${var.environment}-01"
     WEBSITE_CONTENTAZUREFILECONNECTIONSTRING = data.azurerm_storage_account.fadependency_sa.primary_connection_string
     XDG_CACHE_HOME                           = "/tmp/.cache"
 
