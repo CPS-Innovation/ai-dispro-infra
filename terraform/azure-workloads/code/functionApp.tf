@@ -11,62 +11,79 @@ resource "azurerm_linux_function_app" "aid_func" {
   tags                          = module.tags.keyvalues
 
   app_settings = {
+
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.aid_ai.instrumentation_key
 
     AZURE_AI_FOUNDRY_API_VERSION     = "2025-03-01-preview"
     AZURE_AI_FOUNDRY_DEPLOYMENT_NAME = "gpt-4o"
-    AZURE_AI_FOUNDRY_ENDPOINT        = "https://aif-dispro-dev.cognitiveservices.azure.com/"
+    AZURE_AI_FOUNDRY_ENDPOINT        = "https://aif-aid-${var.environment}-01.cognitiveservices.azure.com"
     AZURE_AI_FOUNDRY_PROJECT         = "aif-dispro-dev"
 
-    AZURE_BLOB_ACCOUNT_NAME            = "stdisprodev001"
-    AZURE_BLOB_CONTAINER_NAME_ANALYSIS = "processedtst"
-    AZURE_BLOB_CONTAINER_NAME_DOCUMENT = "processedtst"
-    AZURE_BLOB_CONTAINER_NAME_SECTION  = "processedtst"
-    AZURE_BLOB_CONTAINER_NAME_SOURCE   = "corpus"
-    AZURE_BLOB_CONTAINER_NAME_TEST     = "processedtst"
+    AZURE_BLOB_ACCOUNT_NAME       = "staidds${var.environment}01"
+    BLOB_CONTAINER_NAME_PROCESSED = "processedq4"
+    BLOB_CONTAINER_NAME_SECTION   = "sectionq4"
+    BLOB_CONTAINER_NAME_SOURCE    = "sourceq4"
+
+    # AZURE_BLOB_CONTAINER_NAME_ANALYSIS = "processedtst"
+    # AZURE_BLOB_CONTAINER_NAME_DOCUMENT = "processedtst"
+    # AZURE_BLOB_CONTAINER_NAME_SECTION  = "processedtst"
+    # AZURE_BLOB_CONTAINER_NAME_SOURCE   = "corpus"
+    # AZURE_BLOB_CONTAINER_NAME_TEST     = "processedtst"
+
+    TABLE_NAME_ANALYSISJOBS     = "analysisjobs_q4"
+    TABLE_NAME_CASES            = "cases_q4"
+    TABLE_NAME_CHARGES          = "charges_q4"
+    TABLE_NAME_DEFENDANTS       = "defendants_q4"
+    TABLE_NAME_DOCUMENTS        = "documents_q4"
+    TABLE_NAME_EVENTS           = "events_q4"
+    TABLE_NAME_EXPERIMENTS      = "experiments_q4"
+    TABLE_NAME_OFFENCES         = "offences_q4"
+    TABLE_NAME_PROMPT_TEMPLATES = "prompt_templates_q4"
+    TABLE_NAME_SECTIONS         = "sections_q4"
+    TABLE_NAME_VERSIONS         = "versions_q4"
+
+    # TABLE_NAME_ANALYSIS = "analysestst"
+    # TABLE_NAME_DOCUMENT = "documentstst"
+    # TABLE_NAME_PROMPT   = "promptsq3"
+    # TABLE_NAME_SECTION  = "sectionstst"
+    # TABLE_NAME_STATUS   = "statustst"
+    # TABLE_NAME_TEST     = "test"
+    # AZURE_TABLE_ACCOUNT_NAME = "staidds${var.environment}01"
 
     AZURE_DOC_INTELLIGENCE_API_VERSION = "2024-11-30"
-    AZURE_DOC_INTELLIGENCE_ENDPOINT    = "https://di-dispro-dev.cognitiveservices.azure.com/"
+    AZURE_DOC_INTELLIGENCE_ENDPOINT    = "https://di-aid-${var.environment}-01.cognitiveservices.azure.com/"
 
-    AZURE_KEY_VAULT_CMS_API_KEY_NAME              = "cms-key-dev"
-    AZURE_KEY_VAULT_CMS_PASSWORD_NAME             = "cms-user-pass-dev"
-    AZURE_KEY_VAULT_CMS_USER_NAME                 = "cms-user-name-dev"
-    AZURE_KEY_VAULT_DOC_INTELLIGENCE_API_KEY_NAME = "DocIntelApiKey"
-    AZURE_KEY_VAULT_POSTGRESQL_PASSWORD_NAME      = "psql-password-dev"
-    AZURE_KEY_VAULT_URI                           = "https://kv-dispro-dev-1.vault.azure.net/"
+    AZURE_KEY_VAULT_URI                      = "https://kv-aid-${var.subscription}-01.vault.azure.net/"
+    CMS_API_KEY_AZURE_KEY_VAULT_SECRET_NAME  = "aid-cms-api-key"
+    CMS_USERNAME_AZURE_KEY_VAULT_SECRET_NAME = "aid-cms-username"
+    CMS_PASSWORD_AZURE_KEY_VAULT_SECRET_NAME = "aid-cms-password"
+    CMS_ENDPOINT                             = "https://fa-wm-app-ddei-${var.environment}.azurewebsites.net/api"
 
-    AZURE_TABLE_ACCOUNT_NAME = "stdisprodev001"
+    # AZURE_KEY_VAULT_CMS_API_KEY_NAME              = "cms-key-dev"
+    # AZURE_KEY_VAULT_CMS_PASSWORD_NAME             = "cms-user-pass-dev"
+    # AZURE_KEY_VAULT_CMS_USER_NAME                 = "cms-user-name-dev"
+    # AZURE_KEY_VAULT_DOC_INTELLIGENCE_API_KEY_NAME = "DocIntelApiKey"
+    # AZURE_KEY_VAULT_POSTGRESQL_PASSWORD_NAME      = "psql-password-dev"
 
-    AzureWebJobsStorage = ""
+    AzureWebJobsStorage = data.azurerm_storage_account.fadependency_sa.primary_connection_string
 
-    BUILD_FLAGS = "UseExpressBuild"
-
-    CMS_ENDPOINT = "https://fa-wm-app-ddei-dev.azurewebsites.net/api"
-
-    ENABLE_ORYX_BUILD = "true"
-    ENVIRONMENT       = "tst"
-
-    FUNCTIONS_EXTENSION_VERSION = "~4"
-    FUNCTIONS_WORKER_RUNTIME    = "python"
-
-    POSTGRESQL_DATABASE_NAME = "postgres"
-    POSTGRESQL_HOST          = "10.7.175.47"
-    POSTGRESQL_PORT          = "5432"
-    POSTGRESQL_USER          = "postgres"
-
-    SCM_DO_BUILD_DURING_DEPLOYMENT = "1"
-
-    TABLE_NAME_ANALYSIS = "analysestst"
-    TABLE_NAME_DOCUMENT = "documentstst"
-    TABLE_NAME_PROMPT   = "promptsq3"
-    TABLE_NAME_SECTION  = "sectionstst"
-    TABLE_NAME_STATUS   = "statustst"
-    TABLE_NAME_TEST     = "test"
-
-    WEBSITE_CONTENTSHARE = "fa-co-dispro-dev-01aa99"
+    BUILD_FLAGS                              = "UseExpressBuild"
+    ENABLE_ORYX_BUILD                        = "true"
+    FUNCTIONS_EXTENSION_VERSION              = "~4"
+    FUNCTIONS_WORKER_RUNTIME                 = "python"
+    SCM_DO_BUILD_DURING_DEPLOYMENT           = "1"
+    WEBSITE_CONTENTSHARE                     = "fa-co-dispro-dev-01aa99"
     WEBSITE_CONTENTAZUREFILECONNECTIONSTRING = data.azurerm_storage_account.fadependency_sa.primary_connection_string
+    XDG_CACHE_HOME                           = "/tmp/.cache"
 
-    XDG_CACHE_HOME = "/tmp/.cache"
+    # ENVIRONMENT       = "tst"
+
+    POSTGRESQL_DATABASE_NAME = "ai_dispro_db"
+    POSTGRESQL_HOST          = "psql-aid-${var.environment}-01.postgres.database.azure.com"
+    POSTGRESQL_PORT          = "5432"
+    POSTGRESQL_SCHEMA        = "ai_dispro_schema"
+    POSTGRESQL_USERNAME      = "fa-aid-${var.environment}-01"
+
   }
 
   site_config {
