@@ -12,10 +12,17 @@ resource "azurerm_linux_function_app" "aid_func" {
 
   app_settings = {
 
+    ###### Azure AI Settings ######
+
     AZURE_AI_FOUNDRY_API_VERSION     = "2025-03-01-preview"
     AZURE_AI_FOUNDRY_DEPLOYMENT_NAME = "gpt-4o"
     AZURE_AI_FOUNDRY_ENDPOINT        = "https://aif-aid-${var.environment}-01.cognitiveservices.azure.com"
     AZURE_AI_FOUNDRY_PROJECT         = "aif-dispro-dev"
+
+    ###### Doc Intelligence Settings ######
+
+    AZURE_DOC_INTELLIGENCE_API_VERSION = "2024-11-30"
+    AZURE_DOC_INTELLIGENCE_ENDPOINT    = "https://di-aid-${var.environment}-01.cognitiveservices.azure.com/"
 
     ###### Storage Settings ######
 
@@ -37,11 +44,6 @@ resource "azurerm_linux_function_app" "aid_func" {
     TABLE_NAME_PROMPT_TEMPLATES = "prompt_templates_q4"
     TABLE_NAME_SECTIONS         = "sections_q4"
     TABLE_NAME_VERSIONS         = "versions_q4"
-
-    ###### Doc Intelligence Settings ######
-
-    AZURE_DOC_INTELLIGENCE_API_VERSION = "2024-11-30"
-    AZURE_DOC_INTELLIGENCE_ENDPOINT    = "https://di-aid-${var.environment}-01.cognitiveservices.azure.com/"
 
     ###### Key Vault Settings ######
 
