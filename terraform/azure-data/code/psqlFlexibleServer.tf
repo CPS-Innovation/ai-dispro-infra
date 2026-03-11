@@ -12,7 +12,7 @@ resource "azurerm_postgresql_flexible_server" "psql" {
 
   authentication {
     active_directory_auth_enabled = true
-    password_auth_enabled         = true
+    password_auth_enabled         = false
   }
 
   dynamic "high_availability" {
