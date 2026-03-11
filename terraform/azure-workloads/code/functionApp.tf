@@ -65,6 +65,7 @@ resource "azurerm_linux_function_app" "aid_func" {
 
     ###### Standard App Settings ######
 
+    APP_ENVIRONMENT                          = var.environment
     APPLICATIONINSIGHTS_CONNECTION_STRING    = azurerm_application_insights.aid_ai.connection_string
     AzureWebJobsStorage                      = data.azurerm_storage_account.fadependency_sa.primary_connection_string
     BUILD_FLAGS                              = "UseExpressBuild"

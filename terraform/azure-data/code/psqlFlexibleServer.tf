@@ -76,3 +76,9 @@ resource "azurerm_postgresql_flexible_server_configuration" "psql-pgaudit-role" 
   server_id = azurerm_postgresql_flexible_server.psql.id
   value     = "pgaudit"
 }
+
+resource "azurerm_postgresql_flexible_server_configuration" "psql-shared-preload-libraries" {
+  name      = "shared_preload_libraries"
+  server_id = azurerm_postgresql_flexible_server.psql.id
+  value     = "PGAUDIT,PG_CRON,PG_STAT_STATEMENTS"
+}
