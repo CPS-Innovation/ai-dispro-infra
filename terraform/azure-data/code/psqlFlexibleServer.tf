@@ -82,3 +82,9 @@ resource "azurerm_postgresql_flexible_server_configuration" "psql-shared-preload
   server_id = azurerm_postgresql_flexible_server.psql.id
   value     = "PGAUDIT,PG_CRON,PG_STAT_STATEMENTS"
 }
+
+resource "azurerm_postgresql_flexible_server_configuration" "log-line-prefix" {
+  name      = "log_line_prefix"
+  server_id = azurerm_postgresql_flexible_server.psql.id
+  value     = "%m [%p] user=%u db=%d app=%a client=%h session=%c"
+}
