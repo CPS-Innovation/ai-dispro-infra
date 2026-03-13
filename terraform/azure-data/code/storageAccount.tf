@@ -50,3 +50,30 @@ resource "azurerm_private_endpoint" "aidds_sa_blob_pe" {
 
   depends_on = [azurerm_storage_account.aidds_sa]
 }
+
+resource "azurerm_storage_management_policy" "aidds_lifecycle" {
+  storage_account_id = azurerm_storage_account.aidds_sa.id
+
+  rule {
+    name    = "delete-after-31-days"
+    enabled = true
+
+    filters {
+      blob_types = ["blockBlob", "appendBlob"]
+    }
+
+    actions {
+      base_blob {
+        delete_after_days_since_creation_greater_than = 31
+      }
+
+      snapshot {
+        delete_after_days_since_creation_greater_than = 31
+      }
+
+      version {
+        delete_after_days_since_creation = 31
+      }
+    }
+  }
+}
