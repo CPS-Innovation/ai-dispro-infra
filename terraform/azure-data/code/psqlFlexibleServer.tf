@@ -88,3 +88,15 @@ resource "azurerm_postgresql_flexible_server_configuration" "log-line-prefix" {
   server_id = azurerm_postgresql_flexible_server.psql.id
   value     = "%m [%p] user=%u db=%d app=%a client=%h session=%c"
 }
+
+resource "azurerm_postgresql_flexible_server_configuration" "cron-database-name" {
+  name      = "cron.database_name"
+  server_id = azurerm_postgresql_flexible_server.psql.id
+  value     = "ai_dispro_db"
+}
+
+resource "azurerm_postgresql_flexible_server_configuration" "pgaudit-log-client" {
+  name      = "pgaudit.log_client"
+  server_id = azurerm_postgresql_flexible_server.psql.id
+  value     = "on"
+}
